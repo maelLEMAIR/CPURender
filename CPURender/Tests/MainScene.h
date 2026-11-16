@@ -1,0 +1,53 @@
+﻿#ifndef MAIN_SCENE_H_INCLUDED
+#define MAIN_SCENE_H_INCLUDED
+
+#include "../Scene.h"
+#include "../Texture.h"
+#include "../TerrainGenerator.h"
+#include "../OceanWaves.h"
+#include "../SmokeEmitter.h"
+#include "../SnowEmitter.h"
+#include "../SparkleEmitter.h"
+
+class MainScene : public Scene
+{
+public:
+    MainScene() = default;
+    ~MainScene() = default;
+    void Init() override;
+    void Update(float _dt) override;
+    void LoadSkybox() override;
+    void HandleEvent(float _dt) override;
+    
+private:
+    Mesh     m_carMesh;
+    Mesh     m_wheelAvMesh;
+    Mesh     m_wheelArMesh;
+    Mesh     m_skyboxMesh;
+    Texture  m_carTexture;
+    Texture  m_cubeTexture;
+
+    Material m_defaultMaterial;
+    Material m_carMaterial;
+    Material m_skyboxMaterial;
+    
+    ObjectId m_car = 0;
+    ObjectId m_wheelAr = -1;
+    ObjectId m_wheelAv = -1;
+    ObjectId m_skybox = 0;
+
+    bool     m_pWasDown = false;
+
+    SmokeEmitter   m_smoke;     // pot d'echappement
+    SnowEmitter    m_snow;      // suit la camera
+    SparkleEmitter m_sparkle;   // sur le toit de la voiture (B = rafale)
+
+    TerrainGenerator m_Terrain;
+
+    ObjectId m_OceanID = 0;
+    OceanWaves m_Ocean;
+    int m_OceanAmplitude = 0;
+};
+
+
+#endif
